@@ -15,9 +15,14 @@ const tsFileName = `${folderName}.ts`;
 const readDataFile = `readData.ts`;
 const dataFolderPath = path.join(folderPath, "data");
 const dataFilePath = path.join(dataFolderPath, "data.txt");
+const testDataFilePath = path.join(dataFolderPath, "testData.txt");
 
 const template = `
-export const Day${day} = () => {
+import { readFile } from "./readData";
+
+export const Day${day} = async () => {
+const dataRead = "src/day-${day}/data/data.txt";
+  const formatData = (await readFile(dataRead))
     return 0
 }
 `;
@@ -79,6 +84,11 @@ try {
     .catch((err) => {
       console.error("Error fetching data:", err);
     });
+
+  if (!fs.existsSync(testDataFilePath)) {
+    fs.writeFileSync(testDataFilePath, "");
+    console.log(`File "testData.txt" created.`);
+  }
 
   console.log("Project structure created successfully!");
 } catch (err) {
