@@ -17,7 +17,8 @@ const readDataFile = `readData.ts`;
 const dataFolderPath = path.join(folderPath, "data");
 const dataFilePath = path.join(dataFolderPath, "data.txt");
 const testDataFilePath = path.join(dataFolderPath, "testData.txt");
-const tsFilePlus = `${folderPlusName}.ts`;
+const folderPlusPath = path.join(__dirname, "../src", folderPlusName);
+const tsFileNamePlus = `${folderPlusName}.ts`;
 
 const template = `
 import { readFile } from "./readData";
@@ -25,7 +26,8 @@ import { readFile } from "./readData";
 export const Day${day} = async () => {
   const dataRead = "src/day-${day}/data/data.txt";
   const formatData = (await readFile(dataRead))
-    return 0
+  
+  return 0
 }
 `;
 
@@ -35,7 +37,8 @@ import { readFile } from "./readData";
 export const DayPlus${day} = async () => {
   const dataRead = "src/day-${day}/data/data.txt";
   const formatData = (await readFile(dataRead))
-    return 0
+  
+  return 0
 }
 `;
 
@@ -79,10 +82,11 @@ try {
     console.log(`File "${readDataFile}" created.`);
   }
 
-  // Create day-plus .ts file inside main folder
-  if (!fs.existsSync(tsFilePlus)) {
-    fs.writeFileSync(tsFilePlus, templatePlus);
-    console.log(`File "${tsFilePlus}" created.`);
+  // Create day-plus.ts file inside main folder
+  const tsFilePathPlus: string = path.join(folderPlusPath, tsFileNamePlus);
+  if (!fs.existsSync(tsFilePathPlus)) {
+    fs.writeFileSync(tsFilePathPlus, templatePlus);
+    console.log(`File "${tsFileNamePlus}" created.`);
   }
 
   // Create data folder
