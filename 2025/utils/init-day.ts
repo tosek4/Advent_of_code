@@ -17,7 +17,6 @@ const readDataFile = `readData.ts`;
 const dataFolderPath = path.join(folderPath, "data");
 const dataFilePath = path.join(dataFolderPath, "data.txt");
 const testDataFilePath = path.join(dataFolderPath, "testData.txt");
-const folderPlusPath = path.join(__dirname, "../src", folderPlusName);
 const tsFileNamePlus = `${folderPlusName}.ts`;
 
 const template = `
@@ -83,7 +82,7 @@ try {
   }
 
   // Create day-plus.ts file inside main folder
-  const tsFilePathPlus: string = path.join(folderPlusPath, tsFileNamePlus);
+  const tsFilePathPlus: string = path.join(folderPath, tsFileNamePlus);
   if (!fs.existsSync(tsFilePathPlus)) {
     fs.writeFileSync(tsFilePathPlus, templatePlus);
     console.log(`File "${tsFileNamePlus}" created.`);
