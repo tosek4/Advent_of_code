@@ -1,7 +1,7 @@
-import { Day4 } from "./day-4/day-4";
+import { DayPlus4 } from "./day-4/day-plus-4";
 
 const Main = () => {
-  const result = Day4();
+  const result = DayPlus4();
   return result;
 };
 
