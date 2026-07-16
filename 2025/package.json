@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^1.18.1",
     "dotenv": "^16.4.7",
+    "javascript-lp-solver": "^1.0.3",
     "yargs": "^17.7.2"
   }
 }
