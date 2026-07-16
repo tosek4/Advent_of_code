@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-export const readFile = (filePath: string): Promise<string[][]> => {
+export const readFile = (filePath: string): Promise<string> => {
   return new Promise((resolve, reject) => {
     const absolutePath = path.resolve(filePath);
 
@@ -10,13 +10,7 @@ export const readFile = (filePath: string): Promise<string[][]> => {
         reject(new Error("Error reading file: " + err.message));
         return;
       }
-
-      const result = data
-        .trim()
-        .split("\n")
-        .map((el) => el.split(""));
-
-      resolve(result);
+      resolve(data);
     });
   });
 };

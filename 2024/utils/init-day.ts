@@ -10,15 +10,34 @@ if (!day) {
 }
 
 const folderName = `day-${day}`;
+const folderPlusName = `day-plus-${day}`;
 const folderPath = path.join(__dirname, "../src", folderName);
 const tsFileName = `${folderName}.ts`;
 const readDataFile = `readData.ts`;
 const dataFolderPath = path.join(folderPath, "data");
 const dataFilePath = path.join(dataFolderPath, "data.txt");
+const testDataFilePath = path.join(dataFolderPath, "testData.txt");
+const tsFileNamePlus = `${folderPlusName}.ts`;
 
 const template = `
-export const Day${day} = () => {
-    return 0
+import { readFile } from "./readData";
+
+export const Day${day} = async () => {
+  const dataRead = "src/day-${day}/data/data.txt";
+  const formatData = (await readFile(dataRead))
+  
+  return 0
+}
+`;
+
+const templatePlus = `
+import { readFile } from "./readData";
+
+export const DayPlus${day} = async () => {
+  const dataRead = "src/day-${day}/data/data.txt";
+  const formatData = (await readFile(dataRead))
+  
+  return 0
 }
 `;
 
@@ -62,6 +81,13 @@ try {
     console.log(`File "${readDataFile}" created.`);
   }
 
+  // Create day-plus.ts file inside main folder
+  const tsFilePathPlus: string = path.join(folderPath, tsFileNamePlus);
+  if (!fs.existsSync(tsFilePathPlus)) {
+    fs.writeFileSync(tsFilePathPlus, templatePlus);
+    console.log(`File "${tsFileNamePlus}" created.`);
+  }
+
   // Create data folder
   if (!fs.existsSync(dataFolderPath)) {
     fs.mkdirSync(dataFolderPath);
@@ -79,6 +105,11 @@ try {
     .catch((err) => {
       console.error("Error fetching data:", err);
     });
+
+  if (!fs.existsSync(testDataFilePath)) {
+    fs.writeFileSync(testDataFilePath, "");
+    console.log(`File "testData.txt" created.`);
+  }
 
   console.log("Project structure created successfully!");
 } catch (err) {
